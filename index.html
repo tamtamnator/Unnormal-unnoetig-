@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Unnötigstes Internet-Erlebnis</title>
+  <style>
+    body {
+      background-color: #ffe4e1;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      margin-top: 5%;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      animation: shake 0.5s infinite;
+      color: hotpink;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    button {
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: gold;
+      color: black;
+      border: 3px dashed purple;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    #chaos {
+      margin-top: 30px;
+      display: none;
+      animation: dance 1s infinite alternate;
+    }
+
+    @keyframes dance {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(5deg) scale(1.1); }
+    }
+
+    .emoji {
+      font-size: 50px;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    img.cat {
+      width: 300px;
+      margin-top: 20px;
+      border: 5px dotted magenta;
+      border-radius: 15px;
+      animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Drücke NICHT den Knopf 😼</h1>
+  <button onclick="ausloesen()">Nicht drücken!</button>
+
+  <div id="chaos">
+    <div class="emoji">🤯✨🙀🎉🦄🔥</div>
+    <p style="font-size: 2em; color: red;">Jetzt hast du's getan.</p>
+    <img class="cat" src="https://cataas.com/cat/gif" alt="Unnötige Katze">
+    <div class="emoji">🎊💥🐾💃😹🎈</div>
+  </div>
+
+  <script>
+    function ausloesen() {
+      const farben = ['#ff69b4', '#00ffff', '#ffff00', '#ff4500', '#aaffaa', '#ffccff'];
+      document.body.style.backgroundColor = farben[Math.floor(Math.random() * farben.length)];
+
+      const chaosDiv = document.getElementById("chaos");
+      chaosDiv.style.display = "block";
+
+      const sound = new Audio("https://www.soundjay.com/button/button-10.mp3");
+      sound.play();
+    }
+  </script>
+</body>
+</html>

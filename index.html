@@ -2,102 +2,119 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Unnötigstes Internet-Erlebnis</title>
+  <title>Unnormal unnötig</title>
   <style>
     body {
       background-color: #ffe4e1;
-      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-family: "Comic Sans MS", cursive;
       text-align: center;
-      margin-top: 5%;
-      overflow: hidden;
+      overflow-x: hidden;
+      padding-bottom: 100px;
     }
 
     h1 {
       font-size: 3em;
-      animation: shake 0.5s infinite;
+      animation: shake 0.4s infinite;
       color: hotpink;
+      margin-top: 30px;
     }
 
     @keyframes shake {
-      0% { transform: translateX(0); }
+      0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+      75% { transform: translateX(5px); }
     }
 
     button {
-      padding: 20px 40px;
-      font-size: 24px;
-      background-color: gold;
-      color: black;
+      padding: 15px 30px;
+      font-size: 22px;
+      background-color: yellow;
       border: 3px dashed purple;
       border-radius: 20px;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.2) rotate(5deg);
-    }
-
-    #chaos {
-      margin-top: 30px;
-      display: none;
-      animation: dance 1s infinite alternate;
-    }
-
-    @keyframes dance {
-      0% { transform: rotate(0deg) scale(1); }
-      100% { transform: rotate(5deg) scale(1.1); }
+      margin-top: 20px;
     }
 
     .emoji {
-      font-size: 50px;
-      animation: blink 0.7s infinite;
+      font-size: 40px;
+      animation: blink 0.6s infinite;
+      margin: 10px;
     }
 
     @keyframes blink {
       0% { opacity: 1; }
-      50% { opacity: 0.2; }
+      50% { opacity: 0.1; }
       100% { opacity: 1; }
     }
 
-    img.cat {
-      width: 300px;
-      margin-top: 20px;
-      border: 5px dotted magenta;
+    .cat-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .cat-container img {
+      width: 200px;
+      border: 4px dotted magenta;
       border-radius: 15px;
-      animation: spin 5s linear infinite;
+      animation: spin 6s linear infinite;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .emoji-bar {
+      font-size: 28px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Drücke NICHT den Knopf 😼</h1>
-  <button onclick="ausloesen()">Nicht drücken!</button>
 
-  <div id="chaos">
-    <div class="emoji">🤯✨🙀🎉🦄🔥</div>
-    <p style="font-size: 2em; color: red;">Jetzt hast du's getan.</p>
-    <img class="cat" src="https://cataas.com/cat/gif" alt="Unnötige Katze">
-    <div class="emoji">🎊💥🐾💃😹🎈</div>
-  </div>
+  <h1>Drück NICHT 😼</h1>
+  <button onclick="zeigChaos()">Nicht drücken!</button>
+
+  <div class="emoji-bar">🎉💥🧠🙀🐾✨</div>
+
+  <div class="cat-container" id="katzenZone"></div>
 
   <script>
-    function ausloesen() {
+    const katzenZone = document.getElementById("katzenZone");
+
+    const katzenGIFs = [
+      "https://cataas.com/cat/gif",
+      "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+      "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+      "https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif",
+      "https://media.giphy.com/media/yFQ0ywscgobJK/giphy.gif",
+      "https://media.giphy.com/media/Lq0h93752f6J9tijrh/giphy.gif"
+    ];
+
+    function zeigChaos() {
+      // Farbe ändern
       const farben = ['#ff69b4', '#00ffff', '#ffff00', '#ff4500', '#aaffaa', '#ffccff'];
       document.body.style.backgroundColor = farben[Math.floor(Math.random() * farben.length)];
 
-      const chaosDiv = document.getElementById("chaos");
-      chaosDiv.style.display = "block";
+      // Emoji anzeigen
+      const emojiBar = document.querySelector(".emoji-bar");
+      const emojis = ["🎊", "😹", "💃", "🐱", "🔥", "🚀", "🦄", "💥"];
+      emojiBar.innerText = emojis.sort(() => 0.5 - Math.random()).slice(0, 6).join("");
 
-      const sound = new Audio("https://www.soundjay.com/button/button-10.mp3");
-      sound.play();
+      // Neue Katzen hinzufügen
+      for (let i = 0; i < 3; i++) {
+        const img = document.createElement("img");
+        const randomURL = katzenGIFs[Math.floor(Math.random() * katzenGIFs.length)];
+        img.src = randomURL;
+        katzenZone.appendChild(img);
+      }
+
+      // Sound abspielen
+      const beep = new Audio("https://www.soundjay.com/button/beep-07.wav");
+      beep.play();
     }
   </script>
 </body>

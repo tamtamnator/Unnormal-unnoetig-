@@ -32,7 +32,7 @@
       border: 3px dashed purple;
       border-radius: 20px;
       cursor: pointer;
-      margin: 10px;
+      margin-top: 20px;
     }
 
     .emoji {
@@ -59,17 +59,12 @@
       width: 200px;
       border: 4px dotted magenta;
       border-radius: 15px;
-      animation: spin 5s linear infinite, bounce 1s infinite alternate;
+      animation: spin 6s linear infinite;
     }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
-    }
-
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-30px); }
     }
 
     .emoji-bar {
@@ -81,18 +76,11 @@
 <body>
 
   <h1>Drück NICHT 😼</h1>
-
   <button onclick="zeigChaos()">Nicht drücken!</button>
-  <button onclick="selbstzerstoerung()">💣 Selbstzerstörung</button>
 
   <div class="emoji-bar">🎉💥🧠🙀🐾✨</div>
 
   <div class="cat-container" id="katzenZone"></div>
-
-  <audio id="musik" loop autoplay>
-    <source src="https://www.bensound.com/bensound-music/bensound-funkyelement.mp3" type="audio/mpeg">
-    Dein Browser unterstützt keine Musik.
-  </audio>
 
   <script>
     const katzenZone = document.getElementById("katzenZone");
@@ -111,6 +99,23 @@
       const farben = ['#ff69b4', '#00ffff', '#ffff00', '#ff4500', '#aaffaa', '#ffccff'];
       document.body.style.backgroundColor = farben[Math.floor(Math.random() * farben.length)];
 
-      // Emojis ändern
+      // Emoji anzeigen
       const emojiBar = document.querySelector(".emoji-bar");
-      const emojis = ["🎊]()
+      const emojis = ["🎊", "😹", "💃", "🐱", "🔥", "🚀", "🦄", "💥"];
+      emojiBar.innerText = emojis.sort(() => 0.5 - Math.random()).slice(0, 6).join("");
+
+      // Neue Katzen hinzufügen
+      for (let i = 0; i < 3; i++) {
+        const img = document.createElement("img");
+        const randomURL = katzenGIFs[Math.floor(Math.random() * katzenGIFs.length)];
+        img.src = randomURL;
+        katzenZone.appendChild(img);
+      }
+
+      // Sound abspielen
+      const beep = new Audio("https://www.soundjay.com/button/beep-07.wav");
+      beep.play();
+    }
+  </script>
+</body>
+</html>
